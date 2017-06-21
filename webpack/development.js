@@ -30,5 +30,6 @@ module.exports = () => {
       new CheckerPlugin(),
       new webpack.HotModuleReplacementPlugin(),
     ],
+    output: null,
   }, base)
 }
