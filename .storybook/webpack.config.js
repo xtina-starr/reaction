@@ -6,6 +6,7 @@ const sharify = require("./sharify")
 const webpack = require("webpack")
 const webpackMerge = require("webpack-merge")
 const { CheckerPlugin } = require("awesome-typescript-loader")
+const StatsPlugin = require("stats-webpack-plugin")
 
 /**
  * Write out a file that stubs the data that’s normally shared with the client through the `sharify` module. This file
@@ -25,6 +26,7 @@ module.exports = {
       sharify: sharifyPath.replace(/\.js$/, ""),
     },
   },
+  cache: true,
   module: {
     rules: [
       { test: /\.json$/, loader: "json-loader" },
@@ -44,5 +46,17 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CheckerPlugin(), new webpack.HotModuleReplacementPlugin()],
+  profile: true,
+  plugins: [
+    new CheckerPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new StatsPlugin(
+      "stats.json",
+      {
+        chunkModules: true,
+        exclude: [/node_modules[\\\/]react/],
+      },
+      {}
+    ),
+  ],
 }

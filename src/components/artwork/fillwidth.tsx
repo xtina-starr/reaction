@@ -27,7 +27,7 @@ export class Fillwidth extends React.Component<Props, null> {
 
   renderArtwork(artwork, dimensions, i) {
     const { gutter } = this.props
-    const artworkSize = find(dimensions, ["__id", artwork.__id])
+    const artworkSize = find(dimensions, ["__i", artwork.__id])
     return (
       <Artwork
         artwork={artwork as any}

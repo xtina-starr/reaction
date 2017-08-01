@@ -60,7 +60,7 @@ class ForgotPasswordForm extends React.Component<Props, State> {
     const options: RequestInit = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "applcation/json",
         Accept: "application/json",
         "X-XAPP-TOKEN": this.props.appToken,
       },
