@@ -51,13 +51,14 @@ export default class ItemLink extends React.Component<Props, null> {
     null
   }
 
-  onClick() {
-    this.followItem()
-  }
+  // onClick() {
+  //   // this.followItem()
+  //   this.prop
+  // }
 
   render() {
     return (
-      <Link onClick={this.onClick.bind(this)}>
+      <Link onClick={this.props.onClick.bind(this)}>
         <Col>
           {
             <Avatar
