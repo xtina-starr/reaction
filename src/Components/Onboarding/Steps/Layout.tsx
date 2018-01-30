@@ -10,6 +10,7 @@ interface Props {
   title: string
   subtitle: string
   onNextButtonPressed?: () => void
+  isLastStep?: boolean | null
 }
 
 const Container = styled.div`
@@ -40,29 +41,41 @@ const Subtitle = styled(StyledTitle)`
   `};
 `
 
+const StickyButton = styled.div`
+  position: sticky;
+  bottom: 0px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, white, white);
+  display: flex;
+  justify-content: center;
+`
+
 const ButtonContainer = styled(Button)`
-  margin: 0 auto 50px;
+  margin: 50px 0px;
   display: block;
   width: 250px;
   ${media.sm`
     width: 100%;
+    margin: 25px 0px;
   `};
 `
 
 export class Layout extends React.Component<Props, null> {
   render() {
     const disabled = !this.props.onNextButtonPressed
+    const buttonText = this.props.isLastStep ? "finished" : "next"
     return (
       <Container>
-        <MainTitle titleSize="xlarge">{this.props.title} </MainTitle>
-        <Subtitle titleSize="xlarge">{this.props.subtitle}</Subtitle>
+        <MainTitle>{this.props.title} </MainTitle>
+        <Subtitle>{this.props.subtitle}</Subtitle>
         <div>{this.props.children}</div>
-        <ButtonContainer
-          disabled={disabled}
-          onClick={this.props.onNextButtonPressed}
-        >
-          Next
-        </ButtonContainer>
+        <StickyButton>
+          <ButtonContainer
+            disabled={disabled}
+            onClick={this.props.onNextButtonPressed}
+          >
+            {buttonText}
+          </ButtonContainer>
+        </StickyButton>
       </Container>
     )
   }
