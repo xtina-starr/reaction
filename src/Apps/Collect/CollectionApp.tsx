@@ -75,19 +75,10 @@ export class CollectionApp extends Component<CollectionAppProps> {
             <CollectionFilterContainer collection={collection} />
           </Box>
           <Box>
-            {/* <RelatedCollectionsRail
-              artistID={
-                collection.query.artist_id || collection.query.artist_ids[0]
-              }
-            /> */}
             {artistId ? (
               <ArtistCollectionsRail artistID={artistId} />
             ) : (
-              <RelatedCollectionsRail
-                artistID={
-                  collection.query.artist_id || collection.query.artist_ids[0]
-                }
-              />
+              <RelatedCollectionsRail category={collection.category} />
             )}
           </Box>
         </FrameWithRecentlyViewed>

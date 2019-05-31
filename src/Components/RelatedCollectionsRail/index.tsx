@@ -1,4 +1,3 @@
-// import { ArtistCollectionsRailQuery } from "__generated__/ArtistCollectionsRailQuery.graphql"
 import { RelatedCollectionsRailQuery } from "__generated__/RelatedCollectionsRailQuery.graphql"
 import { SystemContextConsumer } from "Artsy"
 import React from "react"
@@ -6,7 +5,7 @@ import { graphql, QueryRenderer } from "react-relay"
 import { RelatedCollectionsRailFragmentContainer as RelatedCollectionsRail } from "./RelatedCollectionsRail"
 
 interface Props {
-  artistID: string
+  category: string
   isFeaturedArtistContent?: boolean
 }
 
@@ -18,20 +17,20 @@ export const RelatedCollectionsRailContent: React.SFC<Props> = passedProps => {
           <QueryRenderer<RelatedCollectionsRailQuery>
             environment={relayEnvironment}
             variables={{
-              isFeaturedArtistContent: true,
+              showOnEditorial: true,
               size: 8,
-              artistID: passedProps.artistID,
+              category: passedProps.category,
             }}
             query={graphql`
               query RelatedCollectionsRailQuery(
-                $isFeaturedArtistContent: Boolean
+                $showOnEditorial: Boolean
                 $size: Int
-                $artistID: String
+                $category: String
               ) {
                 collections: marketingCollections(
-                  isFeaturedArtistContent: $isFeaturedArtistContent
+                  showOnEditorial: $showOnEditorial
                   size: $size
-                  artistID: $artistID
+                  category: $category
                 ) {
                   ...RelatedCollectionsRail_collections
                 }
