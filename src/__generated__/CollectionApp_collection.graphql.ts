@@ -2,6 +2,7 @@
 
 import { ConcreteFragment } from "relay-runtime";
 import { CollectionFilterContainer_collection$ref } from "./CollectionFilterContainer_collection.graphql";
+import { CollectionsHubRails_linkedCollections$ref } from "./CollectionsHubRails_linkedCollections.graphql";
 import { Header_artworks$ref } from "./Header_artworks.graphql";
 import { RelatedCollectionsRail_collections$ref } from "./RelatedCollectionsRail_collections.graphql";
 import { SeoProductsForArtworks_artworks$ref } from "./SeoProductsForArtworks_artworks.graphql";
@@ -26,6 +27,9 @@ export type CollectionApp_collection = {
     readonly artworks: ({
         readonly " $fragmentRefs": Header_artworks$ref & SeoProductsForArtworks_artworks$ref;
     }) | null;
+    readonly linkedCollections: ReadonlyArray<{
+        readonly " $fragmentRefs": CollectionsHubRails_linkedCollections$ref;
+    }>;
     readonly " $fragmentRefs": CollectionFilterContainer_collection$ref;
     readonly " $refType": CollectionApp_collection$ref;
 };
@@ -296,6 +300,22 @@ return {
       ]
     },
     {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "linkedCollections",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "MarketingCollectionGroup",
+      "plural": true,
+      "selections": [
+        {
+          "kind": "FragmentSpread",
+          "name": "CollectionsHubRails_linkedCollections",
+          "args": null
+        }
+      ]
+    },
+    {
       "kind": "FragmentSpread",
       "name": "CollectionFilterContainer_collection",
       "args": [
@@ -383,5 +403,5 @@ return {
   ]
 };
 })();
-(node as any).hash = '7b7b24a2b0de7a85bcf435c8ca133ccd';
+(node as any).hash = 'bc9fcf2f4a540a402dc8fe72ae5ed8d7';
 export default node;

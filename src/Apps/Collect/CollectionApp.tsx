@@ -3,6 +3,7 @@ import { CollectionApp_collection } from "__generated__/CollectionApp_collection
 import { AppContainer } from "Apps/Components/AppContainer"
 import { track } from "Artsy/Analytics"
 import * as Schema from "Artsy/Analytics/Schema"
+import { CollectionsHubRailsContainer as CollectionsHubRails } from "Components/CollectionsHubRails"
 import { FrameWithRecentlyViewed } from "Components/FrameWithRecentlyViewed"
 import { RelatedCollectionsRailFragmentContainer as RelatedCollectionsRail } from "Components/RelatedCollectionsRail/RelatedCollectionsRail"
 import { BreadCrumbList } from "Components/v2/Seo"
@@ -65,6 +66,9 @@ export class CollectionApp extends Component<CollectionAppProps> {
           <CollectionHeader
             collection={collection}
             artworks={artworks as any}
+          />
+          <CollectionsHubRails
+            marketingCollection={collection.linkedCollections}
           />
           <Box>
             <CollectionFilterContainer collection={collection} />
@@ -130,6 +134,9 @@ export const CollectionAppFragmentContainer = createFragmentContainer(
         ) {
           ...Header_artworks
           ...SeoProductsForArtworks_artworks
+        }
+        linkedCollections {
+          ...CollectionsHubRails_linkedCollections
         }
 
         ...CollectionFilterContainer_collection
